@@ -29,7 +29,7 @@ body {
     color: var(--text-dark);
     line-height: 1.6;
     transition: background-color var(--transition-speed), color var(--transition-speed);
-    overflow: hidden; /* Prevent scrolling */
+    overflow-x: hidden;
 }
 
 /* Dark Mode */
@@ -58,6 +58,15 @@ body.dark-mode .card-button {
 
 body.dark-mode .hero-overlay {
     background: rgba(0,0,0,0.6);
+}
+
+/* Prevent scrolling only on index.html */
+body.no-scroll {
+    overflow: hidden;
+}
+
+body:not(.no-scroll) {
+    overflow: auto;
 }
 
 /* Header */
@@ -195,7 +204,7 @@ body.dark-mode #theme-toggle {
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    margin-top: 0; /* Remove offset as page is non-scrollable */
+    margin-top: 0; /* No offset as page is non-scrollable */
 }
 
 .hero-video {
@@ -253,6 +262,143 @@ body.dark-mode .hero-card {
     transform: translateY(-5px);
 }
 
+/* Seriesborg Logos Section */
+.seriesborg-logos {
+    padding: 100px 0;
+    background: var(--background-light);
+    transition: background var(--transition-speed);
+}
+
+body.dark-mode .seriesborg-logos {
+    background: #1e1e1e;
+}
+
+.seriesborg-logos h2 {
+    text-align: center;
+    font-family: var(--font-primary);
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.seriesborg-logos h2::after {
+    content: '';
+    width: 60px;
+    height: 4px;
+    background: var(--primary-color);
+    position: absolute;
+    left: 50%;
+    bottom: -10px;
+    transform: translateX(-50%);
+}
+
+.logos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.logo-item {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+body.dark-mode .logo-item {
+    background: #2c2c2c;
+    box-shadow: 0 4px 15px rgba(255,255,255,0.05);
+}
+
+.logo-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.logo-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    background: #f9f9f9;
+    padding: 20px;
+    transition: filter var(--transition-speed);
+}
+
+body.dark-mode .logo-item img {
+    background: #1e1e1e;
+}
+
+.logo-item:hover img {
+    filter: brightness(0.9);
+}
+
+/* Footer */
+footer {
+    background: #333;
+    color: #fff;
+    padding: 30px 0;
+    transition: background var(--transition-speed);
+}
+
+body.dark-mode footer {
+    background: #1e1e1e;
+}
+
+.footer-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.footer-logo a {
+    font-family: var(--font-primary);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer-social a {
+    color: #fff;
+    margin-left: 15px;
+    font-size: 1.2rem;
+    transition: color var(--transition-speed);
+}
+
+.footer-social a:hover {
+    color: var(--primary-color);
+}
+
+.footer-bottom {
+    text-align: center;
+    font-size: 0.9rem;
+    border-top: 1px solid #444;
+    padding-top: 15px;
+}
+
+.footer-links {
+    margin-top: 10px;
+}
+
+.footer-links a {
+    color: #fff;
+    margin: 0 10px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color var(--transition-speed);
+}
+
+.footer-links a:hover {
+    color: var(--primary-color);
+}
+
+body.dark-mode .footer-links a:hover {
+    color: var(--accent-color);
+}
+
 /* Back to Top Button */
 #back-to-top {
     position: fixed;
@@ -275,8 +421,20 @@ body.dark-mode .hero-card {
     transform: translateY(-5px);
 }
 
-/* Ensure no scrolling */
+/* Ensure the page can scroll if needed */
 html, body {
     height: 100%;
-    overflow: hidden;
+    overflow: auto;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .seriesborg-logos h2::after,
+    .hero-card {
+        left: 50%;
+    }
+
+    .logos-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
 }
